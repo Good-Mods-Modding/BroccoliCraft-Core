@@ -4,8 +4,8 @@ license = "${licence}"
 issueTrackerURL = "${issue_tracker}"
 [[mods]]
 modId = "${mod_id}"
-version = "${mod_version}"
-displayName = "${mod_name}"
+version = "${version}"
+displayName = "${display_name}"
 # updateJSONURL = ""
 displayURL = "${website}"
 logoFile = "${mod_id}.png"
@@ -28,4 +28,4 @@ description='''${description}'''
 
 [modproperties.${mod_id)}]
     catalogueImageIcon = "${mod_id}.png"
-    configuredBackground = "${mod_id}:textures/block/broccoli_block.png"
+    configuredBackground = "${mod_id}:textures/item/broccoli.png"
