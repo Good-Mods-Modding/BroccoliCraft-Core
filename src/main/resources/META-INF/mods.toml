@@ -1,6 +1,6 @@
-modLoader = "javafml"
-loaderVersion = "${forge_version_range}"
-license = "${licence}"
+modLoader="javafml"
+loaderVersion="${forge_version_range}"
+license="${licence}"
 issueTrackerURL = "${issue_tracker}"
 [[mods]]
 modId = "${mod_id}"
