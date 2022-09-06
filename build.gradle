@@ -136,41 +136,26 @@ dependencies {
 */
 }
 
-def resource_targets = ["META-INF/mods.toml", "pack.mcmeta"]
-task replaceResources(type: Copy) {
-//  dependsOn(jar)
-    outputs.upToDateWhen {
-        false
+def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
+def intoTargets = ["$rootDir/out/production/resources/", "$rootDir/out/production/${project.name}.main/", "$rootDir/bin/main/"]
+def replaceProperties = [mod_id: mod_id, mod_name: mod_name, mod_version: mod_version, mod_authors: mod_authors, mod_description: mod_description, display_url: display_url, issue_tracker: issue_tracker_url, licence: licence, forge_version_range: forge_version_range, minecraft_version_range: minecraft_version_range, pack_format: pack_format]
+processResources {
+    inputs.properties replaceProperties
+    replaceProperties.put 'project', project
+
+    filesMatching(resourceTargets) {
+        expand replaceProperties
     }
-    def spec = copySpec {
-        from(sourceSets.main.resources) {
-            include resource_targets
-            expand
-                mod_id: mod_id,
-                mod_name: mod_name,
-                version: mod_version,
-                authors: mod_authors,
-                description: mod_description,
-                display_url: display_url,
-                issue_tracker: issue_tracker_url,
-                license: license,
-                forge_version_range: forge_version_range,
-                minecraft_version_range: minecraft_version_range,
-                pack_format: pack_format
-        }
-    }
-    with spec
-    into "$buildDir/resources/main/"
-    if (new File("$rootDir/out/production/${project.name}.main/").exists()) {
-        copy {
-            with spec
-            into "$rootDir/out/production/${project.name}.main/"
-        }
-    }
-    if (new File("$rootDir/bin/main/").exists()) {
-        copy {
-            with spec
-            into "$rootDir/bin/main/"
+
+    intoTargets.each { target ->
+        if (file(target).exists()) {
+            copy {
+                from(sourceSets.main.resources) {
+                    include resourceTargets
+                    expand replaceProperties
+                }
+                into target
+            }
         }
     }
 }
@@ -182,7 +167,7 @@ jar {
                 "Specification-Vendor"    : "${authors}",
                 "Specification-Version"   : "${specification_version}",
                 "Implementation-Title"    : project.name,
-                "Implementation-Version"  : mod_version,
+                "Implementation-Version"  : "${mod_version}",
                 "Implementation-Vendor"   : "${authors}",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
