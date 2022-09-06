@@ -1,0 +1,209 @@
+buildscript {
+    repositories {
+        maven { url = "https://maven.minecraftforge.net" }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "5.1.+", changing: true
+    }
+}
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+plugins {
+    id "eclipse"
+    id "maven-publish"
+}
+apply plugin: "net.minecraftforge.gradle"
+
+version = "${mod_version}"
+group = "${base_package}.${mod_id}"
+archivesBaseName = "${mod_id}"
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println "Java: ${System.getProperty "java.version"}, JVM: ${System.getProperty "java.vm.version"} (${System.getProperty "java.vendor"}), Arch: ${System.getProperty "os.arch"}"
+minecraft {
+    mappings channel: "${mappings_channel}", version: "${minecraft_version}"
+
+    runs {
+        client {
+            workingDirectory project.file("run")
+
+            property "forge.logging.markers", "REGISTRIES"
+
+            property "forge.logging.console.level", "debug"
+
+            property "forge.enabledGameTestNamespaces", "${mod_id}"
+
+            mods {
+                mod_id {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file("run")
+
+            property "forge.logging.markers", "REGISTRIES"
+
+            property "forge.logging.console.level", "debug"
+
+            property "forge.enabledGameTestNamespaces", "${mod_id}"
+
+            mods {
+                mod_id {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        gameTestServer {
+            workingDirectory project.file("run")
+
+            property "forge.logging.markers", "REGISTRIES"
+
+            property "forge.logging.console.level", "debug"
+
+            property "forge.enabledGameTestNamespaces", "${mod_id}"
+
+            mods {
+                mod_id {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file("run")
+
+            property "forge.logging.markers", "REGISTRIES"
+
+            property "forge.logging.console.level", "debug"
+
+            args "--mod", "${mod_id}", "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources/")
+
+            mods {
+                mod_id {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir "src/generated/resources" }
+
+repositories {
+
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${forge_version}"
+
+/*
+    compileOnly fg.deobf("appeng:appliedenergistics2:${ae_version}:api")
+    runtimeOnly fg.deobf("appeng:appliedenergistics2:${ae_version}")
+    implementation fg.deobf("curse.maven:catalogue-459701:${catalogue_version}")
+    implementation fg.deobf("curse.maven:cofh-core-69162:${cofh_core_version}")
+    implementation fg.deobf("com.github.alcatrazEscapee:chocolate:${chocolate_version}")
+//  testImplementation fg.deobf("com.github.alcatrazEscapee:chocolate:${chocolate_version}") { transitive = false }
+    implementation fg.deobf("curse.maven:configured-457570:${configured_version}")
+    implementation fg.deobf("com.simibubi.create:Create:${create_version}")
+    implementation fg.deobf("curse.maven:ctm-267602:${ctm_version}")
+    implementation fg.deobf("curse.maven:thermal-cultivation-271835:${cultivation_version}")
+    implementation fg.deobf("curse.maven:thermal-expansion-69163:${expansion_version}")
+    implementation fg.deobf("com.jozufozu.flywheel:Flywheel:${flywheel_version}")
+    implementation fg.deobf("curse.maven:thermal-foundation-222880:${foundation_version}")
+    implementation fg.deobf("curse.maven:immersive-engineering-231951:${ie_version}")
+    implementation fg.deobf("curse.maven:thermal-innovation-291737:${innovation_version}")
+    implementation fg.deobf("curse.maven:jade-324717:${jade_version}")
+    implementation fg.deobf("curse.maven:jei-integration-265917:${jei_integration_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+    implementation fg.deobf("curse.maven:jer-integration-506948:${jer_integration_version}")
+    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${jer_version}")
+    implementation fg.deobf("curse.maven:thermal-locomotion-406959:${locomotion_version}")
+    implementation fg.deobf("slimeknights.mantle:Mantle:${mantle_version}")
+    compileOnly "mekanism:Mekanism:${mekanism_version}:api"
+    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}")
+    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}:additions")
+    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}:generators")
+    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}:tools")
+    compileOnly fg.deobf("com.refinedmods:refinedstorage:${rs_version}:api")
+    runtimeOnly fg.deobf("com.refinedmods:refinedstorage:${rs_version}")
+    implementation fg.deobf("slimeknights.tconstruct:tconstruct:${tconstruct_version}")
+    implementation fg.deobf("com.github.McJtyMods:TheOneProbe:${top_version}")
+*/
+}
+
+def resource_targets = ["META-INF/mods.toml", "pack.mcmeta"]
+task replaceResources(type: Copy) {
+//  dependsOn(jar)
+    outputs.upToDateWhen {
+        false
+    }
+    def spec = copySpec {
+        from(sourceSets.main.resources) {
+            include resource_targets
+            expand
+                "mod_id": mod_id,
+                "mod_name": mod_name,
+                "version": mod_version,
+                "authors": mod_authors,
+                "description": mod_description,
+                "display_url": display_url,
+                "issue_tracker": issue_tracker_url,
+                "license": license,
+                "forge_version_range": forge_version_range,
+                "minecraft_version_range": minecraft_version_range,
+                "pack_format": pack_format
+        }
+    }
+    with spec
+    into "$buildDir/resources/main/"
+    if (new File("$rootDir/out/production/${project.name}.main/").exists()) {
+        copy {
+            with spec
+            into "$rootDir/out/production/${project.name}.main/"
+        }
+    }
+    if (new File("$rootDir/bin/main/").exists()) {
+        copy {
+            with spec
+            into "$rootDir/bin/main/"
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "${mod_id}",
+                "Specification-Vendor"    : "${authors}",
+                "Specification-Version"   : "${specification_version}",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : mod_version,
+                "Implementation-Vendor"   : "${authors}",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+jar.finalizedBy("reobfJar")
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}

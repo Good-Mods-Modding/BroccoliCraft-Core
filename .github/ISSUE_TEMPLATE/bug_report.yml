@@ -1,0 +1,85 @@
+name: Bug Report
+description: File a Bug Report
+labels: [bug]
+assignees:
+  - "BeansBeefBroccoli"
+body:
+- type: markdown
+  attributes:
+    value: |
+      Before submitting a bug report, please make sure you have read and filled out this form entirely, and that:
+      - Your bug isn't a vanilla bug or another mod's bug
+      - Your issue isn't a duplicate (make sure to use the search function!)
+
+      **Don't forget to give your issue a descriptive title.** "It Crashes" isn't useful information, and it's annoying for the devs.
+- type: dropdown
+  attributes:
+    label: "Operating System"
+    description: "Select the operating system(s) this bug occurs on."
+    multiple: true
+    options:
+    - "Windows"
+    - "Linux"
+    - "macOS"
+    - "Other"
+  validations:
+    required: true
+- type: input
+  attributes:
+    label: "Minecraft Version"
+    placeholder: "Type Here"
+  validations:
+    required: true
+- type: input
+  attributes:
+    label: "Forge Version"
+    placeholder: "Type Here"
+  validations:
+    required: true
+- type: input
+  attributes:
+    label: "BroccoliCraft Core Version"
+    placeholder: "Type Here"
+  validations:
+    required: true
+- type: input
+  attributes:
+    label: "Singleplayer or Multiplayer"
+    placeholder: "Type Here"
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: "Description"
+    description: "Write what happened and what you expected to happen here."
+    placeholder: "Type Here"
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: "Steps to Reproduce"
+    description: "Create a bulleted list of steps you took to produce the bug."
+    placeholder: "Type Here"
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: "Other Mod(s) Involved"
+    description: "List other mods involved in the bug here."
+    placeholder: "Type Here"
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: "Suspected Cause"
+    description: "If you know what could be causing this bug, describe it here."
+    placeholder: "Type Here"
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: "Log(s)"
+    description: "Upload any relevant logs to a site such as https://pastebin.com or https://gist.github.com, and put any links here."
+    placeholder: "Type Here"
+  validations:
+    required: false
