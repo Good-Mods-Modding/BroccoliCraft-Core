@@ -7,7 +7,7 @@ buildscript {
         classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "5.1.+", changing: true
     }
 }
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+// Only edit below this line
 plugins {
     id "eclipse"
     id "maven-publish"
@@ -99,41 +99,6 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${forge_version}"
-
-/*
-    compileOnly fg.deobf("appeng:appliedenergistics2:${ae_version}:api")
-    runtimeOnly fg.deobf("appeng:appliedenergistics2:${ae_version}")
-    implementation fg.deobf("curse.maven:catalogue-459701:${catalogue_version}")
-    implementation fg.deobf("curse.maven:cofh-core-69162:${cofh_core_version}")
-    implementation fg.deobf("com.github.alcatrazEscapee:chocolate:${chocolate_version}")
-//  testImplementation fg.deobf("com.github.alcatrazEscapee:chocolate:${chocolate_version}") { transitive = false }
-    implementation fg.deobf("curse.maven:configured-457570:${configured_version}")
-    implementation fg.deobf("com.simibubi.create:Create:${create_version}")
-    implementation fg.deobf("curse.maven:ctm-267602:${ctm_version}")
-    implementation fg.deobf("curse.maven:thermal-cultivation-271835:${cultivation_version}")
-    implementation fg.deobf("curse.maven:thermal-expansion-69163:${expansion_version}")
-    implementation fg.deobf("com.jozufozu.flywheel:Flywheel:${flywheel_version}")
-    implementation fg.deobf("curse.maven:thermal-foundation-222880:${foundation_version}")
-    implementation fg.deobf("curse.maven:immersive-engineering-231951:${ie_version}")
-    implementation fg.deobf("curse.maven:thermal-innovation-291737:${innovation_version}")
-    implementation fg.deobf("curse.maven:jade-324717:${jade_version}")
-    implementation fg.deobf("curse.maven:jei-integration-265917:${jei_integration_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
-    implementation fg.deobf("curse.maven:jer-integration-506948:${jer_integration_version}")
-    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${jer_version}")
-    implementation fg.deobf("curse.maven:thermal-locomotion-406959:${locomotion_version}")
-    implementation fg.deobf("slimeknights.mantle:Mantle:${mantle_version}")
-    compileOnly "mekanism:Mekanism:${mekanism_version}:api"
-    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}")
-    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}:additions")
-    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}:generators")
-    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}:tools")
-    compileOnly fg.deobf("com.refinedmods:refinedstorage:${rs_version}:api")
-    runtimeOnly fg.deobf("com.refinedmods:refinedstorage:${rs_version}")
-    implementation fg.deobf("slimeknights.tconstruct:tconstruct:${tconstruct_version}")
-    implementation fg.deobf("com.github.McJtyMods:TheOneProbe:${top_version}")
-*/
 }
 
 def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
