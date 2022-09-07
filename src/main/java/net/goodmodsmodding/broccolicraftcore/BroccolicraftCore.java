@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Mod(BroccoliCraftCore.MOD_ID)
 public class BroccoliCraftCore {
-    public static final String MOD_ID = "tutorial";
+    public static final String MOD_ID = "broccolicraftcore";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
