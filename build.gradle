@@ -7,7 +7,9 @@ buildscript {
         classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "5.1.+", changing: true
     }
 }
+
 // DON'T EDIT ABOVE THIS LINE
+
 plugins {
     id "eclipse"
     id "maven-publish"
@@ -91,7 +93,7 @@ minecraft {
     }
 }
 
-sourceSets.main.resources { srcDir "src/generated/resources" }
+sourceSets.main.resources {srcDir "src/generated/resources"}
 
 repositories {}
 
@@ -99,12 +101,12 @@ dependencies {
     minecraft "net.minecraftforge:forge:${forge_version}"
 }
 
-def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
+def resourceTargets = ["META-INF/mods.toml", "pack.mcmeta"]
 def intoTargets = ["$rootDir/out/production/resources/", "$rootDir/out/production/${project.name}.main/", "$rootDir/bin/main/"]
 def replaceProperties = [credits: credits, mod_id: mod_id, display_name: display_name, version: version, authors: authors, description: description, website: website, issue_tracker: issue_tracker, licence: licence, forge_version_range: forge_version_range, minecraft_version_range: minecraft_version_range, pack_format: pack_format]
 processResources {
     inputs.properties replaceProperties
-    replaceProperties.put 'project', project
+    replaceProperties.put "project", project
 
     filesMatching(resourceTargets) {
         expand replaceProperties
@@ -147,7 +149,8 @@ publishing {
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/mcmodsrepo"
+            name = "Maven" // TODO: fix name
+            url = "file://${project.projectDir}/mcmodsrepo"
         }
     }
 }
