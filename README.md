@@ -1,3 +1,3 @@
 # BroccoliCraft Core
 
-The core of the BeanCraft modpack
+The core of the BroccoliCraft modpack
