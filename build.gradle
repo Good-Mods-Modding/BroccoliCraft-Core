@@ -16,7 +16,7 @@ plugins {
 }
 apply plugin: "net.minecraftforge.gradle"
 
-version = "${minecraft_version}-${mod_version}"
+version = "${minecraft_version}-${version}"
 group = base_package
 archivesBaseName = mod_id
 
