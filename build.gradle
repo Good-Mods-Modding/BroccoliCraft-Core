@@ -17,7 +17,7 @@ plugins {
 apply plugin: "net.minecraftforge.gradle"
 
 version = "${version}"
-group = "${base_package}.${mod_id}"
+group = "${base_package}"."${mod_id}"
 archivesBaseName = "${mod_id}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
