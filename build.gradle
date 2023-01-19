@@ -16,15 +16,15 @@ plugins {
 }
 apply plugin: "net.minecraftforge.gradle"
 
-version = "${version}"
-group = "${base_package}"."${mod_id}"
-archivesBaseName = "${mod_id}"
+version = "${minecraft_version}-${mod_version}"
+group = base_package
+archivesBaseName = mod_id
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty "java.version"}, JVM: ${System.getProperty "java.vm.version"} (${System.getProperty "java.vendor"}), Arch: ${System.getProperty "os.arch"}"
 minecraft {
-    mappings channel: "${mappings_channel}", version: "${minecraft_version}"
+    mappings channel: mappings_channel, version: minecraft_version
 
     runs {
         client {
@@ -34,10 +34,10 @@ minecraft {
 
             property "forge.logging.console.level", "debug"
 
-            property "forge.enabledGameTestNamespaces", "${mod_id}"
+            property "forge.enabledGameTestNamespaces", mod_id
 
             mods {
-                mod_id {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -50,10 +50,10 @@ minecraft {
 
             property "forge.logging.console.level", "debug"
 
-            property "forge.enabledGameTestNamespaces", "${mod_id}"
+            property "forge.enabledGameTestNamespaces", mod_id
 
             mods {
-                mod_id {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -66,10 +66,10 @@ minecraft {
 
             property "forge.logging.console.level", "debug"
 
-            property "forge.enabledGameTestNamespaces", "${mod_id}"
+            property "forge.enabledGameTestNamespaces", mod_id
 
             mods {
-                mod_id {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -82,10 +82,10 @@ minecraft {
 
             property "forge.logging.console.level", "debug"
 
-            args "--mod", "${mod_id}", "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources/")
+            args "--mod", mod_id, "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources/")
 
             mods {
-                mod_id {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -128,12 +128,12 @@ processResources {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "${specification_title}",
-                "Specification-Vendor"    : "${authors}",
-                "Specification-Version"   : "${specification_version}",
-                "Implementation-Title"    : "${implementation_title}",
-                "Implementation-Version"  : "${implementation_version}",
-                "Implementation-Vendor"   : "${authors}",
+                "Specification-Title"     : specification_title,
+                "Specification-Vendor"    : authors,
+                "Specification-Version"   : specification_version,
+                "Implementation-Title"    : implementation_title,
+                "Implementation-Version"  : implementation_version,
+                "Implementation-Vendor"   : authors,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
