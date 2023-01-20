@@ -101,7 +101,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 }
 
-def resourceTargets = ["META-INF/mods.toml", "pack.mcmeta"]
+def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
 def intoTargets = ["$rootDir/out/production/resources/", "$rootDir/out/production/${project.name}.main/", "$rootDir/bin/main/"]
 def replaceProperties = [credits: credits, mod_id: mod_id, display_name: display_name, version: version, authors: authors, description: description, website: website, issue_tracker: issue_tracker, licence: licence, forge_version_range: forge_version_range, minecraft_version_range: minecraft_version_range, pack_format: pack_format]
 processResources {
